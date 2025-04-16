@@ -1,0 +1,101 @@
+.pro {
+  padding: 30px;
+  background-color: #f4f4f9;
+  border-radius: 10px;
+  max-width: 1000px;
+  margin: 4rem auto;
+  font-family: Arial, sans-serif;
+}
+
+.user_box,
+.schedule_box,
+.user_membership_list,
+.offer_list {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.trainer_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #eef2f7;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trainer_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.trainer_info_box p {
+  margin: 0;
+}
+
+.trainer_time_slots_box {
+  font-size: 12px;
+  color: #777;
+}
+
+.selected_date_slots {
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.confirmed_slots h2,
+.finished_trainings h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.sessions_nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.offer_list {
+  background-color: #f7f7f7;
+}
+
+.offers_box {
+  padding: 15px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.membership {
+  padding: 15px;
+  background: #f4f4f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}

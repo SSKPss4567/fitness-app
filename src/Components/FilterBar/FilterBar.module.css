@@ -1,0 +1,125 @@
+.main_box {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 16px;
+  border-right: 1px solid #d2d2d7;
+  box-sizing: border-box; 
+  padding-left: 1.5rem;
+  
+}
+
+.search {
+  width: 100%;
+  max-width: 100%; 
+  box-sizing: border-box;
+}
+
+.filter_section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filter_title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.menu{
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2rem;
+  height: 1.75rem;
+  cursor: pointer;
+}
+
+/* .menu span {
+  height: 0.2rem;
+  width: 100%;
+  background-color: black;
+  border-radius: 0.2rem;
+} */
+
+
+/* Labels for filters */
+.label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* BoxSelector */
+.selector {
+  width: 100%;
+}
+
+/* Mobile-friendly adjustments */
+@media (max-width: 768px) {
+  .main_box {
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  
+    max-width: none;
+    border-right: none;
+    padding: 12px;
+    background-color: #f9f9f9;
+  }
+
+  .top_section{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .main_box .menu{
+    display: flex;
+  }
+
+  .search {
+    width: 100%; 
+    max-width: 100%;
+  }
+
+  .filter_section {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, visibility 0.4s;
+  }
+  
+  .filter_section.open {
+    max-height: 400px; /* Adjust if necessary */
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .filter_title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0px;
+    margin-bottom: 4px;
+  }
+
+  .label {
+    font-size: 0.85rem;
+  }
+
+  .filter_group {
+    gap: 4px;
+  }
+}

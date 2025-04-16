@@ -1,0 +1,18 @@
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.star_rating{
+  display: flex;
+  gap: 4px;
+}
+
+.on {
+  color: var(--black);
+}
+.off {
+  color: var(--light-gray);
+}

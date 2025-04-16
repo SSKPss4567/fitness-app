@@ -1,0 +1,22 @@
+#footer {
+  width: 100%;
+  background-color: var(--gray);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.footer_box {
+  padding: 40px 80px;
+  display: flex;
+}
+
+.footer_box ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer_box li {
+  list-style: none;
+}

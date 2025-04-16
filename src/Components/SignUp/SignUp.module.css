@@ -1,0 +1,183 @@
+:root {
+    --secondary-color: #fff;
+    --error-color: #D32F2F;
+    --success-color: #388E3C;
+    --light-gray: #f5f5f5;
+    --dark-gray: #333;
+}
+
+/* Main Container */
+.main_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    padding: 1rem;
+    background-color: #f5f5f7;
+    padding-top: 7rem;
+    padding-bottom: 13rem;
+}
+
+/* Form Wrapper */
+.reg_form_div {
+    width: 360px;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    /* border-radius: 10px; */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Form */
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form .form_section{
+    width: 100%;
+    
+}
+
+/* Input Fields */
+/* .input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border 0.3s ease-in-out;
+}
+
+.input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+} */
+
+/* Labels */
+.label {
+    font-weight: bold;
+    text-align: left;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Instructions for validation */
+.instructions {
+    font-size: 0.8rem;
+    color: var(--dark-gray);
+    background: rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    /* border-radius: 5px; */
+    display: inline-block;
+    margin-top: 5px;
+}
+
+/* Hide instruction initially */
+.offscreen {
+    display: none;
+}
+
+/* Error Message */
+.errmsg {
+    background-color: var(--error-color);
+    color: white;
+    padding: 0.75rem;
+    /* border-radius: 5px; */
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Poppins';
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+/* Buttons */
+/* button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #357ABD;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+} */
+
+/* Links */
+.link {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .reg_form_div {
+        padding: 1.5rem;
+    }
+
+    .form {
+        gap: 1rem;
+    }
+}
+
+
+.input {
+    border: 1px solid #ccc !important; /* Стандартный цвет рамки */
+    outline: none !important; /* Убираем стандартное outline */
+    box-shadow: none !important; /* Убираем стандартное свечение при фокусе */
+    transition: border-color 0.3s; /* Плавный переход */
+    border-radius: 0;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 40%;
+}
+
+/* Цвет рамки при наведении */
+.input:hover {
+    border-color: #ccc !important;
+}
+
+/* Цвет рамки при фокусе */
+.input:focus {
+    border-color: black !important; /* Цвет рамки при фокусе */
+    box-shadow: none !important; /* Убираем свечение при фокусе */
+}
+
+/* Визуальный фокус */
+.input:focus-visible {
+    border-color: black !important; /* Черная рамка при фокусе */
+    box-shadow: none !important; /* Убираем свечение */
+}
+
+.age{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sexRadio{
+    gap:2rem;
+}
