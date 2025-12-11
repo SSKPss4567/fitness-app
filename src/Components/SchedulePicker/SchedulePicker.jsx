@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import {
   format,
   addDays,
@@ -6,7 +6,6 @@ import {
   endOfWeek,
   isSameDay,
   parseISO,
-  isBefore,
 } from "date-fns";
 import Calendar from "react-calendar";
 import { useStores } from "../../Store/StoreProvider";
@@ -15,7 +14,6 @@ import classes from "./SchedulePicker.module.css";
 import InnerButton from "../UI/Buttons/InnerButton/InnerButton";
 import CheckboxButton from "../UI/Buttons/CheckboxButton/CheckboxButton";
 import { observer } from "mobx-react";
-import { toJS } from "mobx";
 
 const timeSlots = [
   "09:00",
@@ -33,7 +31,7 @@ const availability = ["Monday", "Wednesday", "Friday"];
 export const SchedulePicker = observer(
   ({ trainerId, unavailableSlots, confirmedSlots }) => {
     const { userStore } = useStores();
-    const { user, bookedSlots, addBookedSlots } = userStore;
+    const { bookedSlots } = userStore;
 
     const [currentWeekStart, setCurrentWeekStart] = useState(
       startOfWeek(new Date(), { weekStartsOn: 1 })
@@ -88,29 +86,6 @@ export const SchedulePicker = observer(
         return { time: slot, isBooked, isBookedByOtherTrainer, isUnavailable };
       });
     };
-
-    // const availableSlotsMap = useMemo(() => {
-    //   return new Map(
-    //     availableWeekDays.map((day) => {
-    //       const dateStr = format(day, "yyyy-MM-dd");
-    //       return [
-    //         dateStr,
-    //         timeSlots.map((slot) => {
-    //           const slotDateTime = `${dateStr}T${slot}:00`;
-    //           const isUnavailable = unavailableSlots.some(
-    //             (unavailableSlot) =>
-    //               isSameDay(parseISO(unavailableSlot), day) &&
-    //               unavailableSlot.includes(slot)
-    //           );
-    //           const isBooked = bookedSlots.some((entry) =>
-    //             entry.timeSlots?.includes(slotDateTime)
-    //           );
-    //           return { time: slot, isBooked, isUnavailable };
-    //         }),
-    //       ];
-    //     })
-    //   );
-    // }, [bookedSlots, unavailableSlots, availableWeekDays]);
 
     const bookSlot = (slot, date) => {
       const slotDateTime = `${format(date, "yyyy-MM-dd")}T${slot}:00`;

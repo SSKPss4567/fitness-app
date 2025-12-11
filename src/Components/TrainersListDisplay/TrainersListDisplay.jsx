@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useFilters from '../../Hooks/useFilters';
 
 import classes from './TrainersListDisplay.module.css';
 
@@ -12,7 +11,6 @@ import FilterSection from '../FilterBar/FilterSection/FilterSection';
 import InnerButton from '../UI/Buttons/InnerButton/InnerButton';
 import DateModal from '../Modals/DateModal/DateModal';
 import BoxSelector from '../UI/Selectors/BoxSelector/BoxSelector';
-import MultiSelect from '../UI/Selectors/MultiSelect/MultiSelect';
 import SearchBar from '../UI/SearchBar/SearchBar';
 
 const specialities = [
@@ -104,13 +102,6 @@ const TrainersListDisplay = () => {
             selectId="speciality" 
             placeholder="Select a speciality" 
           />
-
-          {/* <MultiSelect
-            options={specialities}
-            selectedOptions={selectedFilters.specialities}
-            onChange={useFilters("specialties", )}
-            placeholder="Select amenities"
-          /> */}
         </FilterSection>
 
 

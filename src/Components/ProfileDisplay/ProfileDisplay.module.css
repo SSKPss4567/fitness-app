@@ -8,9 +8,7 @@
 }
 
 .user_box,
-.schedule_box,
-.user_membership_list,
-.offer_list {
+.section {
   background: #fff;
   padding: 20px;
   border-radius: 10px;
@@ -61,41 +59,7 @@ p {
   color: #777;
 }
 
-.selected_date_slots {
-  padding: 15px;
-  background: #f9f9f9;
-  border-radius: 8px;
-  margin-top: 15px;
-}
-
-.confirmed_slots h2,
-.finished_trainings h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.sessions_nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.offer_list {
-  background-color: #f7f7f7;
-}
-
-.offers_box {
-  padding: 15px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-.membership {
-  padding: 15px;
-  background: #f4f4f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 15px;
+.empty {
+  color: #777;
+  font-size: 14px;
 }

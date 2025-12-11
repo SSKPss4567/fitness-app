@@ -179,18 +179,48 @@ class UserStore {
   };
 
   async initializeSession() {
-    // const newToken = await this.loadAuth();
-
-    // if (newToken) {
-    //     await this.fetchUserData();
-    //     await this.fetchUserOrders();
-    // }
-    // else {
-    // this.logoutUser();
-    // }
     const user_storage = localStorage.getItem("user");
     const confirmedSlotsStorage = localStorage.getItem("confirmedSlots") || "";
-    if (user_storage) {
+    
+    // Если пользователь не в localStorage, автоматически логиним первого пользователя
+    if (!user_storage) {
+      const defaultUser = users.find(u => u.role === "user");
+      if (defaultUser) {
+        runInAction(() => {
+          this.setUser(defaultUser);
+          
+          if (Array.isArray(defaultUser.slots)) {
+            const finishedTrainings = [];
+            const confirmedSlots = [];
+
+            defaultUser.slots.forEach(({ trainingId, trainerId, timeSlot, status }) => {
+              const slotDate = new Date(timeSlot);
+              const isPast = isBefore(slotDate, new Date());
+
+              if (status === "confirmed" && !isPast) {
+                confirmedSlots.push({ trainingId, trainerId, timeSlot });
+              } else if (status === "finished" || isPast) {
+                finishedTrainings.push({ trainingId, trainerId, timeSlot });
+              }
+            });
+
+            this.finishedTrainings = finishedTrainings;
+            this.confirmedSlots = confirmedSlots;
+
+            localStorage.setItem(
+              "finishedTrainings",
+              JSON.stringify(toJS(this.finishedTrainings))
+            );
+            localStorage.setItem(
+              "confirmedSlots",
+              JSON.stringify(toJS(this.confirmedSlots))
+            );
+          }
+
+          localStorage.setItem("user", JSON.stringify(this.user));
+        });
+      }
+    } else {
       runInAction(() => {
         this.setUser(JSON.parse(user_storage));
         this.confirmedSlots =

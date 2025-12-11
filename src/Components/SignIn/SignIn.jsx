@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "./SignIn.module.css";
 import InnerButton from "../UI/Buttons/InnerButton/InnerButton";
 import TextButton from "../UI/Buttons/TextButton/TextButton";
@@ -12,7 +12,8 @@ const PWD_REGEX = /^([^\t\n\s]).{7,24}$/;
 
 export const SignIn = observer(() => {
   const { userStore } = useStores();
-  const { setUser, setAuth, fetchUserOrders, signIn } = userStore;
+  const { setUser, setAuth, fetchUserOrders, signIn, isLoggedIn, user } = userStore;
+  const navigate = useNavigate();
   const emailRef = useRef();
   const errRef = useRef();
 
@@ -77,18 +78,7 @@ export const SignIn = observer(() => {
       setErrMsg("Invalid Entry");
       return;
     }
-    // setLoading(true);
     signIn(email, pwd);
-    setSuccess(true);
-    // resetForm();
-
-    // try {
-    // } catch (err) {
-    //     setErrMsg(getErrorMessage(err));
-    //     errRef.current.focus();
-    // } finally {
-    //     // setLoading(false);
-    // }
   };
 
   const getErrorMessage = (error) => {
@@ -108,14 +98,15 @@ export const SignIn = observer(() => {
     setPwd("");
   };
 
+  useEffect(() => {
+    if (isLoggedIn && user && user.id) {
+      navigate("/");
+    }
+  }, [isLoggedIn, user, navigate]);
+
   return (
     <>
-      {success ? (
-        <div className={classes.main_div}>
-          <h1 className={classes.h1}>You're logged in</h1>
-          <Link to="/">Shop</Link>
-        </div>
-      ) : (
+      {!isLoggedIn && (
         <div className={classes.main_div}>
           <div className={classes.reg_form_div}>
             <p

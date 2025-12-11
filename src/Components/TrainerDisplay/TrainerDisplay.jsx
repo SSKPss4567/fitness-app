@@ -19,7 +19,7 @@ import InnerButton from "../UI/Buttons/InnerButton/InnerButton";
 export const TrainerDisplay = observer(() => {
   const { userStore } = useStores();
 
-  const { userRole, bookedSlots } = userStore;
+  const { bookedSlots } = userStore;
   const urlLocation = useLocation();
   const trainerId = Number(
     urlLocation.pathname.replace("/trainers/", "").split("/")[0]

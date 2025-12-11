@@ -4,7 +4,6 @@ import { observer } from "mobx-react";
 import { useStores } from "../Store/StoreProvider";
 
 import ProfileDisplay from "../Components/ProfileDisplay/ProfileDisplay";
-import TrainerProfileDisplay from "../Components/TrainerProfileDisplay/TrainerProfileDisplay";
 
 export const Profile = observer(() => {
   const { userStore } = useStores();
@@ -13,23 +12,14 @@ export const Profile = observer(() => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!userRole) {
+    if (!userRole || userRole !== "user") {
       navigate("/");
     }
   }, [userRole, navigate]);
 
-  if (!userRole) return null;
+  if (!userRole || userRole !== "user") return null;
 
-  switch (userRole) {
-    case "user":
-      return <ProfileDisplay />;
-    case "trainer":
-      return <TrainerProfileDisplay />;
-    //     case "admin":
-    // return <TrainerProfileDisplay />;
-    default:
-      return null;
-  }
+  return <ProfileDisplay />;
 });
 
 export default Profile;
