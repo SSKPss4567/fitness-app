@@ -39,18 +39,42 @@ def gyms_list(request):
         - search: поиск по названию или адресу
         - city: фильтр по городу
         - amenities: фильтр по удобствам (через запятую)
+        - top: количество топ залов по рейтингу (например, top=5)
+        - order_by: сортировка (rating_desc, rating_asc, name)
     """
     gyms = Gym.objects.all().prefetch_related('images', 'trainers')
     
-    # Используем форму для фильтрации
+    # Используем форму для фильтрации (сначала фильтруем)
     filter_form = GymFilterForm(request.GET)
     if filter_form.is_valid():
         gyms = filter_form.filter_queryset(gyms)
+    # Если форма не валидна, просто пропускаем фильтрацию (не возвращаем ошибку)
+    
+    # Проверяем параметр top и order_by для сортировки
+    top = request.GET.get('top')
+    order_by = request.GET.get('order_by', '')
+    
+    # Сортировка
+    if order_by == 'rating_desc':
+        gyms = gyms.order_by('-rating', 'name')
+    elif order_by == 'rating_asc':
+        gyms = gyms.order_by('rating', 'name')
+    elif order_by == 'name':
+        gyms = gyms.order_by('name')
+    elif top:
+        # Если указан top, сортируем по рейтингу
+        gyms = gyms.order_by('-rating', 'name')
     else:
-        return JsonResponse({
-            'error': 'Ошибка валидации',
-            'errors': filter_form.errors
-        }, status=400)
+        # По умолчанию сортируем по имени
+        gyms = gyms.order_by('name')
+    
+    # Ограничиваем количество после фильтрации и сортировки
+    if top:
+        try:
+            top_count = int(top)
+            gyms = gyms[:top_count]
+        except ValueError:
+            pass
     
     data = [serialize_gym(gym) for gym in gyms]
     return JsonResponse({'gyms': data, 'count': len(data)})
@@ -90,18 +114,42 @@ def trainers_list(request):
         - search: поиск по имени
         - gym: фильтр по залу (ID)
         - specialization: фильтр по специализации
+        - top: количество топ тренеров по рейтингу (например, top=5)
+        - order_by: сортировка (rating_desc, rating_asc, name)
     """
     trainers = Trainer.objects.all().prefetch_related('gyms', 'reviews')
     
-    # Используем форму для фильтрации
+    # Используем форму для фильтрации (сначала фильтруем)
     filter_form = TrainerFilterForm(request.GET)
     if filter_form.is_valid():
         trainers = filter_form.filter_queryset(trainers)
+    # Если форма не валидна, просто пропускаем фильтрацию (не возвращаем ошибку)
+    
+    # Проверяем параметр top и order_by для сортировки
+    top = request.GET.get('top')
+    order_by = request.GET.get('order_by', '')
+    
+    # Сортировка
+    if order_by == 'rating_desc':
+        trainers = trainers.order_by('-rating', 'full_name')
+    elif order_by == 'rating_asc':
+        trainers = trainers.order_by('rating', 'full_name')
+    elif order_by == 'name':
+        trainers = trainers.order_by('full_name')
+    elif top:
+        # Если указан top, сортируем по рейтингу
+        trainers = trainers.order_by('-rating', 'full_name')
     else:
-        return JsonResponse({
-            'error': 'Ошибка валидации',
-            'errors': filter_form.errors
-        }, status=400)
+        # По умолчанию сортируем по имени
+        trainers = trainers.order_by('full_name')
+    
+    # Ограничиваем количество после фильтрации и сортировки
+    if top:
+        try:
+            top_count = int(top)
+            trainers = trainers[:top_count]
+        except ValueError:
+            pass
     
     data = [serialize_trainer(trainer) for trainer in trainers]
     return JsonResponse({'trainers': data, 'count': len(data)})
@@ -527,7 +575,38 @@ def create_records(request):
                     errors.append(f'Нельзя записаться на прошедшее время: {slot_datetime_str}')
                     continue
                 
-                # Проверяем, что слот не занят
+                # Проверяем ограничение на месяц вперед
+                from datetime import timedelta
+                max_date = timezone.now() + timedelta(days=30)
+                if slot_datetime > max_date:
+                    # Форматируем дату для более понятного сообщения
+                    local_max_date = timezone.localtime(max_date)
+                    local_slot_date = timezone.localtime(slot_datetime)
+                    # Используем русские названия месяцев
+                    months_ru = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
+                                'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+                    max_date_str = f"{local_max_date.day} {months_ru[local_max_date.month - 1]} {local_max_date.year}"
+                    slot_date_str = f"{local_slot_date.day} {months_ru[local_slot_date.month - 1]} {local_slot_date.year}"
+                    errors.append(
+                        f'Нельзя записаться более чем на месяц вперед. '
+                        f'Максимальная дата записи: {max_date_str}. '
+                        f'Выбранная дата: {slot_date_str}'
+                    )
+                    continue
+                
+                # Проверяем уникальность: один пользователь не может записаться на одно время к одному тренеру дважды
+                existing_user_record = Record.objects.filter(
+                    user=user_profile,
+                    trainer=trainer,
+                    datetime=slot_datetime,
+                    status='scheduled'
+                ).exists()
+                
+                if existing_user_record:
+                    errors.append(f'Вы уже записаны на это время: {slot_datetime_str}')
+                    continue
+                
+                # Проверяем, что слот не занят другим пользователем
                 existing_record = Record.objects.filter(
                     trainer=trainer,
                     datetime=slot_datetime,

@@ -1,0 +1,14 @@
+export const MAIN_ROUTE = "/";
+export const ERROR_ROUTE = "/*";
+export const SIGNUP_ROUTE = "/signup";
+export const SIGNIN_ROUTE = "/signin";
+export const USER_PROFILE_ROUTE = "/profile";
+export const TRAINERS_ROUTE = "/trainers";
+export const GYMS_ROUTE = "/gyms";
+export const ADMIN_ROUTE = "/admin";
+export const ABOUT_ROUTE = "/about";
+export const FAQ_ROUTE = "/faq";
+export const SUPPORT_ROUTE = "/support";
+export const CONFIRM_ROUTE = "/confirm";
+export const PAYMENT_ROUTE = "/payment";
+export const PAYMENT_SUCCESS_ROUTE = "/payment-success";

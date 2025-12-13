@@ -1,0 +1,21 @@
+.pro{
+  display: flex;
+  flex-direction: row;
+  padding-top: 3rem;
+  
+}
+
+.list_box{
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 3600px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 400px));
+  gap: 4.5rem;
+}
+
+@media (max-width: 768px) {
+  .pro{
+    flex-direction: column;
+  }
+}

@@ -81,18 +81,18 @@ class GymImageInline(admin.TabularInline):
 @admin.register(Gym)
 class GymAdmin(admin.ModelAdmin):
     """Админка для спортивных залов"""
-    list_display = ('id', 'name', 'address', 'images_count', 'created_at')
+    list_display = ('id', 'name', 'address', 'rating', 'images_count', 'created_at')
     list_display_links = ('id', 'name')
     search_fields = ('name', 'address', 'description')
-    list_filter = ('created_at',)
-    readonly_fields = ('created_at',)
+    list_filter = ('created_at', 'rating')
+    readonly_fields = ('created_at', 'rating')
     inlines = [GymImageInline]
     fieldsets = (
         ('Основная информация', {
             'fields': ('name', 'address')
         }),
         ('Дополнительная информация', {
-            'fields': ('description',)
+            'fields': ('description', 'amenities', 'rating')
         }),
         ('Системная информация', {
             'fields': ('created_at',),
