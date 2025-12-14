@@ -2,9 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Q, Avg
 from django.contrib.auth.models import User as DjangoUser
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from datetime import datetime
@@ -331,6 +330,25 @@ def user_profile(request, user_id):
     
     # Добавляем записи пользователя
     records = Record.objects.filter(user=profile).select_related('trainer')
+    
+    # Оптимизированное обновление статусов: обновляем только те записи, которые нужно обновить
+    # Используем bulk update вместо вызова update_status() для каждой записи
+    from datetime import timedelta
+    now = timezone.now()
+    cutoff_time = now - timedelta(hours=1, minutes=30)
+    
+    # Находим записи, которые нужно обновить (scheduled и прошло более 1.5 часа)
+    records_to_update = records.filter(
+        status='scheduled',
+        datetime__lte=cutoff_time
+    )
+    
+    if records_to_update.exists():
+        # Используем bulk update для эффективного обновления
+        records_to_update.update(status='completed')
+        # Перезагружаем записи после обновления статусов
+        records = Record.objects.filter(user=profile).select_related('trainer')
+    
     profile_data['records'] = [serialize_record(record) for record in records]
     
     return JsonResponse(profile_data)

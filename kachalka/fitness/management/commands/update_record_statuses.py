@@ -2,8 +2,6 @@
 Django management команда для автоматического обновления статусов тренировок
 """
 from django.core.management.base import BaseCommand
-from django.utils import timezone
-from datetime import timedelta
 from fitness.models import Record
 
 

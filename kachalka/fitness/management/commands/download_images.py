@@ -8,11 +8,10 @@ Django management команда для загрузки placeholder изобр�
 import os
 import random
 import requests
-from io import BytesIO
 from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
 from django.conf import settings
-from fitness.models import Gym, Trainer, GymImage
+from fitness.models import Gym, GymImage
 
 
 class Command(BaseCommand):
@@ -107,30 +106,4 @@ class Command(BaseCommand):
                 self.stdout.write(f'  Зал "{gym.name}": {images_downloaded} изображений')
 
         return gyms_with_images
-
-    def _download_trainer_images(self):
-        """Загружает изображения для всех тренеров (если добавить поле image в модель)"""
-        trainers = Trainer.objects.all()
-        trainers_with_images = 0
-
-        for trainer in trainers:
-            # Генерируем URL для placeholder изображения
-            # Размер: 400x400 для аватаров
-            seed = f"trainer{trainer.id}"
-            url = f"https://picsum.photos/seed/{seed}/400/400"
-
-            # Загружаем изображение
-            image_content = self._download_image(url)
-            
-            if image_content:
-                # Если у тренера есть поле image
-                # trainer.image.save(
-                #     f'trainer_{trainer.id}.jpg',
-                #     image_content,
-                #     save=True
-                # )
-                trainers_with_images += 1
-                self.stdout.write(f'  Тренер "{trainer.full_name}": изображение загружено')
-
-        return trainers_with_images
 

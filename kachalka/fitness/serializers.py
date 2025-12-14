@@ -1,9 +1,6 @@
 """
 Сериализаторы для преобразования моделей Django в JSON
 """
-from django.core.serializers import serialize
-from django.db.models import Avg, Count
-import json
 
 
 def serialize_gym(gym):
