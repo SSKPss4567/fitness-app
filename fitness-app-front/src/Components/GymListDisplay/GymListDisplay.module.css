@@ -1,0 +1,65 @@
+.pro{
+  display: flex;
+  flex-direction: row;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+  min-height: 100vh;
+  padding-bottom: 10rem;
+}
+
+.FilterBar {
+  background-color: #ececec;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.content_wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 6rem);
+  padding-left: 4rem;
+  padding-top: 1rem;
+  flex: 1;
+}
+
+.gyms_section {
+  flex: 1;
+  margin-bottom: 2rem;
+}
+
+.pro .list_box {
+  width: 100%;
+  max-width: 3600px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 300px));
+  gap: 4rem;
+}
+
+.pagination_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+  margin-top: auto;
+}
+
+
+
+
+@media (max-width: 768px) {
+  .pro{
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .content_wrapper {
+    padding-left: 1rem;
+  }
+
+  .pro .list_box {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}

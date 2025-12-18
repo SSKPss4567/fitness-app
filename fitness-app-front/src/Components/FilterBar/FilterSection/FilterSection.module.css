@@ -1,0 +1,82 @@
+.filter_group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+ 
+}
+
+.main_box {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  border-right: 1px solid var(--light-gray, #ddd);
+  background-color: #fff;
+  box-sizing: border-box; 
+}
+
+.search {
+  width: 100%;
+  max-width: 100%; 
+  box-sizing: border-box;
+}
+
+.filter_section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filter_title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  
+}
+
+.menu{
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2rem;
+  height: 1.75rem;
+  cursor: pointer;
+}
+
+/* .menu span {
+  height: 0.2rem;
+  width: 100%;
+  background-color: black;
+  border-radius: 0.2rem;
+} */
+
+
+/* Labels for filters */
+.label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* BoxSelector */
+.selector {
+  width: 100%;
+}
+
+/* Mobile-friendly adjustments */
+@media (max-width: 768px) {
+  .filter_title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0px;
+    margin-bottom: 4px;
+  }
+
+  .filter_group {
+    gap: 4px;
+  }
+}

@@ -1,0 +1,140 @@
+.pro {
+  padding: 30px;
+  background-color: #f4f4f9;
+  border-radius: 10px;
+  max-width: 1000px;
+  margin: 4rem auto;
+  font-family: Arial, sans-serif;
+}
+
+.user_box,
+.section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.trainer_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #eef2f7;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.trainer_info_box p {
+  margin: 0;
+}
+
+.trainer_time_slots_box {
+  font-size: 12px;
+  color: #777;
+}
+
+.empty {
+  color: #777;
+  font-size: 14px;
+}
+
+/* Отмененная карточка */
+.cancelled_card {
+  background: #ffe6e6 !important;
+  border-left: 4px solid #dc3545;
+  opacity: 0.85;
+}
+
+/* Строка со статусом и кнопкой */
+.status_button_row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Бейджи статусов */
+.status_badge_scheduled,
+.status_badge_completed,
+.status_badge_cancelled {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  width: fit-content;
+  height: fit-content;
+}
+
+.status_badge_scheduled {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.status_badge_completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status_badge_cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Кнопка отмены */
+.cancel_button {
+  padding: 4px 12px;
+  background-color: #fff;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  width: fit-content;
+  height: fit-content;
+}
+
+.cancel_button:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.trainer_time_slots_box {
+  font-size: 12px;
+  color: #777;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* Пагинация */
+.pagination_wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+

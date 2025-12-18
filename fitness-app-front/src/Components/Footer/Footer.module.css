@@ -1,0 +1,21 @@
+#footer {
+  width: 100%;
+  background-color: var(--gray);
+  position: relative;
+  margin-top: auto;
+}
+
+.footer_box {
+  padding: 40px 80px;
+  display: flex;
+}
+
+.footer_box ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer_box li {
+  list-style: none;
+}

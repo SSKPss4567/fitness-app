@@ -1,0 +1,28 @@
+.input_style {
+  width: 100%;  /* Ensures input does not exceed its container */
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box; /* Prevents inputs from overflowing due to padding */
+}
+
+.input_style::placeholder {
+  color: var(--gray);
+}
+
+/* Focus state for better accessibility */
+.input_style:focus {
+  border-color: var(--gray);
+  box-shadow: 0 0 5px var(--light-gray);
+  outline: none;
+}
+
+/* Mobile-friendly adjustments */
+@media (max-width: 480px) {
+  .input_style {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}

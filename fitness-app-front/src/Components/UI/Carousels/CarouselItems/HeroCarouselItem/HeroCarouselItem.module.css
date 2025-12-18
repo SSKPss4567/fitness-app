@@ -1,0 +1,20 @@
+.pro {
+  width: 100%;
+  height: 50vh;
+}
+
+.pro .image_box {
+  background-size: cover; /* Растянуть изображение, чтобы заполнить элемент */
+  background-position: center top; /* Центрировать изображение */
+  color: #fff; /* Белый текст поверх фона */
+  width: 100%; /* Ширина на всю доступную область */
+  height: 100%; /* Высота на весь экран (или укажите конкретную высоту) */
+  display: flex; /* Flexbox для центрирования содержимого */
+  /* Вертикальное центрирование текста */
+  flex-direction: column;
+  justify-content: center;
+}
+
+.image_box img {
+  width: 100%;
+}

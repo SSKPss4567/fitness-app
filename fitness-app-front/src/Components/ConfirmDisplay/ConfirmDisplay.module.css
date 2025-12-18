@@ -1,0 +1,92 @@
+.pro {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  max-width: 700px;
+  margin: 2rem auto;
+}
+
+.user_info_box,
+.training_info_box {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.info_list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info_list_item {
+  display: flex;
+  flex-direction: column;
+}
+
+.info_list_item h4 {
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.trainings_list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.trainer_card {
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.trainer_info_box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.trainer_time_slots_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.trainer_time_slots_box .slot_box {
+  width: 70%;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: var(--light-gray);
+}
+
+.slot_box h4 {
+  margin: 0;
+  font-size: 14px;
+  color: black;
+  user-select: none;
+}
+
+.slot_box button {
+  padding: 0.3rem 0.8rem;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.pro > button {
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+}

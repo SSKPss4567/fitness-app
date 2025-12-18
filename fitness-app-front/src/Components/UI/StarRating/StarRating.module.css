@@ -1,0 +1,32 @@
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.star_rating{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.star_rating button {
+  font-size: 1.67rem;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.on {
+  color: #000;
+  -webkit-text-stroke: 1px #000;
+  text-stroke: 1px #000;
+}
+
+.off {
+  color: transparent;
+  -webkit-text-stroke: 1px #000;
+  text-stroke: 1px #000;
+}

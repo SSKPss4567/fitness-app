@@ -1,0 +1,172 @@
+/* Container for the entire profile */
+.profile_container {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Trainer info box */
+.trainer_info_box {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.trainer_image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.trainer_info_box h4 {
+  margin: 10px 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.trainer_info_box p {
+  margin: 5px 0;
+  color: #666;
+}
+
+/* Specialties box */
+.specialties_box {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.specialties_box h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+.specialties_box ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.specialties_box li {
+  margin: 5px 0;
+  color: #666;
+}
+
+/* Schedule box */
+.schedule_box {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.schedule_box h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+.selected_date_slots {
+  margin-top: 20px;
+}
+
+.slots_list {
+  background-color: #f1f1f1;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.slots_list h4 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.slots_list p {
+  margin: 5px 0;
+  color: #666;
+}
+
+/* Certifications box */
+.certifications_box {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.certifications_box h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+.certifications_box ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.certifications_box li {
+  margin: 5px 0;
+  color: #666;
+}
+
+/* Reviews box */
+.reviews_box {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reviews_box h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+.review_card {
+  background-color: #f1f1f1;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.review_card p {
+  margin: 0;
+  color: #666;
+}
+
+.review_card strong {
+  color: #333;
+}
+
+/* Logout button */
+.text_button {
+  margin-top: 20px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.text_button:hover {
+  background-color: #cc0000;
+}

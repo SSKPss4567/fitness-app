@@ -1,0 +1,54 @@
+.mainDisplayBox {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 9.5rem;
+  background-color: #f5f5f7;
+}
+
+.servicesListBox {
+  padding: 1.2rem 6rem;
+  padding-top: 4rem;
+  padding-bottom: 1rem;
+}
+
+.trainerListBox {
+  margin-bottom: 7.5rem;
+}
+
+.ListBox {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 5%;
+  margin-bottom: 1rem;
+}
+
+.carus {
+  margin-top: 1rem;
+}
+
+/* Move FilterBar as a second navbar in mobile view */
+@media (max-width: 768px) {
+  .mainDisplayBox {
+    flex-direction: column; /* Moves FilterBar to the top */
+  }
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.TextBox {
+  background-image: url("/static/back.jpg"); /* Ссылка на изображение */
+  background-size: cover; /* Растянуть изображение, чтобы заполнить элемент */
+  background-position: center top; /* Центрировать изображение */
+  color: #fff; /* Белый текст поверх фона */
+  width: 100%; /* Ширина на всю доступную область */
+  height: 90vh; /* Высота на весь экран (или укажите конкретную высоту) */
+  display: flex; /* Flexbox для центрирования содержимого */
+  /* Вертикальное центрирование текста */
+  padding-left: 15%;
+  flex-direction: column;
+  justify-content: center;
+}
