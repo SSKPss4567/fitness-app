@@ -1,5 +1,5 @@
 """
-Django management команда для заполнения базы данных тестовыми данными.
+Django management команда для полного пересоздания базы данных со всеми данными.
 
 Использование:
     python manage.py populate_db --gyms 5 --trainers 10 --users 30
@@ -17,7 +17,7 @@ from fitness.models import UserProfile, Trainer, Gym, GymImage, Record, Review, 
 
 
 class Command(BaseCommand):
-    help = 'Заполняет базу данных тестовыми данными. База данных очищается перед заполнением.'
+    help = 'Полностью пересоздает базу данных: очищает все данные и создает залы, тренеров, пользователей, отзывы и записи.'
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -116,7 +116,7 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.SUCCESS(
                     f'\n{"="*50}\n'
-                    f'База данных успешно заполнена!\n'
+                    f'База данных успешно пересоздана!\n'
                     f'{"="*50}\n'
                 )
             )
@@ -137,8 +137,8 @@ class Command(BaseCommand):
         Trainer.objects.all().delete()
         Gym.objects.all().delete()
         UserProfile.objects.all().delete()
-        # Удаляем пользователей Django (кроме суперпользователей, если нужно их сохранить)
-        DjangoUser.objects.filter(is_superuser=False).delete()
+        # Удаляем всех пользователей Django, включая админов
+        DjangoUser.objects.all().delete()
 
     def _create_gyms(self, count, fake):
         """
@@ -196,6 +196,41 @@ class Command(BaseCommand):
         
         return gyms
 
+    def _get_russian_name_by_gender(self, gender, fake):
+        """Генерирует русское имя с учетом пола."""
+        if gender == 'M':
+            return fake.first_name_male()
+        else:
+            return fake.first_name_female()
+    
+    def _get_russian_lastname_by_gender(self, gender, fake):
+        """Генерирует русскую фамилию с учетом пола."""
+        if gender == 'M':
+            return fake.last_name_male()
+        else:
+            return fake.last_name_female()
+    
+    def _generate_full_name(self, gender, fake):
+        """Генерирует полное имя с учетом пола, избегая похожих имен и фамилий."""
+        max_attempts = 50
+        for _ in range(max_attempts):
+            first_name = self._get_russian_name_by_gender(gender, fake)
+            last_name = self._get_russian_lastname_by_gender(gender, fake)
+            
+            # Проверяем, что имя и фамилия не похожи
+            # Убираем окончания для сравнения
+            first_name_base = first_name.lower().rstrip('аеёиоуыэюя')
+            last_name_base = last_name.lower().rstrip('аеёиоуыэюяовин')
+            
+            # Если имя и фамилия сильно отличаются, используем их
+            if first_name_base != last_name_base and not first_name_base.startswith(last_name_base[:3]) and not last_name_base.startswith(first_name_base[:3]):
+                return f"{first_name} {last_name}"
+        
+        # Если не удалось найти подходящую пару, используем любую
+        first_name = self._get_russian_name_by_gender(gender, fake)
+        last_name = self._get_russian_lastname_by_gender(gender, fake)
+        return f"{first_name} {last_name}"
+
     def _create_trainers(self, count, gyms, fake):
         """Создает тренеров с реалистичными описаниями."""
         trainers = []
@@ -229,8 +264,12 @@ class Command(BaseCommand):
         ]
 
         for _ in range(count):
+            # Случайно выбираем пол тренера
+            gender = random.choice(['M', 'F'])
+            full_name = self._generate_full_name(gender, fake)
+            
             trainer = Trainer.objects.create(
-                full_name=fake.name(),
+                full_name=full_name,
                 specialization=random.choice(specializations),
                 description=random.choice(trainer_descriptions),
                 image='trainers/trainer_base.jpg'  # Дефолтное изображение
@@ -249,7 +288,26 @@ class Command(BaseCommand):
         users = []
         
         for i in range(count):
-            # Создаем Django User
+            # Сначала определяем пол
+            gender = random.choice(['M', 'F'])
+            
+            # Генерируем имя и фамилию с учетом пола
+            first_name = self._get_russian_name_by_gender(gender, fake)
+            last_name = self._get_russian_lastname_by_gender(gender, fake)
+            
+            # Проверяем, что имя и фамилия не похожи
+            max_attempts = 50
+            for _ in range(max_attempts):
+                first_name_base = first_name.lower().rstrip('аеёиоуыэюя')
+                last_name_base = last_name.lower().rstrip('аеёиоуыэюяовин')
+                
+                if first_name_base != last_name_base and not first_name_base.startswith(last_name_base[:3]) and not last_name_base.startswith(first_name_base[:3]):
+                    break
+                
+                first_name = self._get_russian_name_by_gender(gender, fake)
+                last_name = self._get_russian_lastname_by_gender(gender, fake)
+            
+            # Создаем Django User (обычный пользователь)
             username = fake.user_name() + str(i)
             email = f"user{i}_{fake.email()}"
             
@@ -257,16 +315,16 @@ class Command(BaseCommand):
                 username=username,
                 email=email,
                 password='testpass123',
-                first_name=fake.first_name(),
-                last_name=fake.last_name()
+                first_name=first_name,
+                last_name=last_name
             )
             
             # Профиль создается автоматически через сигнал
             # Обновляем данные профиля
             profile = django_user.profile
-            profile.full_name = f"{django_user.first_name} {django_user.last_name}"
+            profile.full_name = f"{first_name} {last_name}"
             profile.age = random.randint(18, 65)
-            profile.gender = random.choice(['M', 'F'])
+            profile.gender = gender
             profile.phone = fake.phone_number()
             profile.save()
             
@@ -440,4 +498,3 @@ class Command(BaseCommand):
                     pass
         
         return reviews_count
-
